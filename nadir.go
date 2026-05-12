@@ -49,8 +49,8 @@
 //
 //   - default build — heuristic classifier only. No CGO, no ML deps.
 //   - -tags onnx    — adds the ONNX-backed MiniLM classifier. Requires
-//                     a C compiler at build time and libonnxruntime
-//                     (loaded via dlopen) at runtime.
+//     a C compiler at build time and libonnxruntime
+//     (loaded via dlopen) at runtime.
 package nadir
 
 import (

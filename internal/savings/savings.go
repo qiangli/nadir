@@ -8,18 +8,18 @@ import (
 	"context"
 	"time"
 
-	"github.com/qiangli/nadir/modelmeta"
 	"github.com/qiangli/nadir/internal/store/sqlite"
+	"github.com/qiangli/nadir/modelmeta"
 )
 
 type Report struct {
-	BaselineModel  string  `json:"baseline_model"`
-	BaselineUSD    float64 `json:"baseline_usd"`
-	ActualUSD      float64 `json:"actual_usd"`
-	SavedUSD       float64 `json:"saved_usd"`
-	SavedFraction  float64 `json:"saved_fraction"`
-	RequestCount   int     `json:"request_count"`
-	Since          time.Time `json:"since"`
+	BaselineModel string    `json:"baseline_model"`
+	BaselineUSD   float64   `json:"baseline_usd"`
+	ActualUSD     float64   `json:"actual_usd"`
+	SavedUSD      float64   `json:"saved_usd"`
+	SavedFraction float64   `json:"saved_fraction"`
+	RequestCount  int       `json:"request_count"`
+	Since         time.Time `json:"since"`
 }
 
 type Calculator struct {

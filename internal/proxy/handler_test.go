@@ -11,8 +11,8 @@ import (
 
 	"github.com/qiangli/nadir/cache"
 	"github.com/qiangli/nadir/classifier"
-	"github.com/qiangli/nadir/internal/config"
 	"github.com/qiangli/nadir/health"
+	"github.com/qiangli/nadir/internal/config"
 	"github.com/qiangli/nadir/provider/fake"
 	"github.com/qiangli/nadir/ratelimit"
 	"github.com/qiangli/nadir/router"
@@ -20,10 +20,10 @@ import (
 )
 
 type fixture struct {
-	srv         *Server
-	primary     *fake.OK
-	fallback    *fake.OK
-	errPrimary  *fake.Err
+	srv        *Server
+	primary    *fake.OK
+	fallback   *fake.OK
+	errPrimary *fake.Err
 }
 
 // newFixture builds a proxy with two providers ("primary", "fallback")

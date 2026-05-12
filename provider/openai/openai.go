@@ -23,11 +23,11 @@ import (
 const defaultBaseURL = "https://api.openai.com/v1"
 
 type Client struct {
-	BaseURL    string
-	APIKey     string
-	HTTP       *http.Client
-	NameStr    string
-	OrgID      string
+	BaseURL string
+	APIKey  string
+	HTTP    *http.Client
+	NameStr string
+	OrgID   string
 }
 
 func New(name, baseURL, apiKey string) *Client {

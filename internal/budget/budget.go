@@ -22,8 +22,8 @@ func formatF(f float64) string {
 }
 
 type Config struct {
-	DailyLimitUSD   float64 // 0 = no limit
-	MonthlyLimitUSD float64 // 0 = no limit
+	DailyLimitUSD   float64   // 0 = no limit
+	MonthlyLimitUSD float64   // 0 = no limit
 	AlertThresholds []float64 // fractions of limit (e.g. 0.5, 0.8, 1.0)
 	NowFunc         func() time.Time
 }
@@ -39,7 +39,7 @@ type Tracker struct {
 }
 
 type State struct {
-	Day        string  `json:"day"` // YYYY-MM-DD
+	Day        string  `json:"day"`   // YYYY-MM-DD
 	Month      string  `json:"month"` // YYYY-MM
 	DailyUSD   float64 `json:"daily_usd"`
 	MonthlyUSD float64 `json:"monthly_usd"`
@@ -49,7 +49,7 @@ type State struct {
 type AlertHook func(event AlertEvent)
 
 type AlertEvent struct {
-	Period    string  // "daily" | "monthly"
+	Period    string // "daily" | "monthly"
 	Threshold float64
 	Limit     float64
 	Spent     float64

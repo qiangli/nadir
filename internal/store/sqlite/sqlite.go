@@ -56,11 +56,11 @@ func (s *Store) Count(ctx context.Context) (int64, error) {
 }
 
 type QueryFilter struct {
-	Since    time.Time
-	Until    time.Time
-	UserID   string
-	Model    string
-	Limit    int
+	Since  time.Time
+	Until  time.Time
+	UserID string
+	Model  string
+	Limit  int
 }
 
 func (s *Store) Query(ctx context.Context, f QueryFilter) ([]types.RequestEntry, error) {

@@ -68,7 +68,7 @@ func (h *Heuristic) Classify(_ context.Context, prompt string) (types.Tier, floa
 	keyword := keywordSignal(prompt, h.complexRE)
 
 	score := clamp01((length + codey + keyword) / 3.0)
-	confidence := math.Abs(score - 0.5) * 2 // [0,1]
+	confidence := math.Abs(score-0.5) * 2 // [0,1]
 
 	tier := BucketScore(score, h.thresholds)
 	return tier, score, confidence, nil

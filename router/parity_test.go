@@ -48,18 +48,18 @@ type profileCase struct {
 }
 
 type agenticCase struct {
-	Label            string `json:"label"`
-	HasTools         bool   `json:"has_tools"`
-	ToolCount        int    `json:"tool_count"`
-	SystemPrompt     string `json:"system_prompt"`
-	MessageCount     int    `json:"message_count"`
-	ExpectedAgentic  bool   `json:"expected_is_agentic"`
+	Label           string `json:"label"`
+	HasTools        bool   `json:"has_tools"`
+	ToolCount       int    `json:"tool_count"`
+	SystemPrompt    string `json:"system_prompt"`
+	MessageCount    int    `json:"message_count"`
+	ExpectedAgentic bool   `json:"expected_is_agentic"`
 }
 
 type reasoningCase struct {
-	Prompt             string `json:"prompt"`
-	SystemMessage      string `json:"system_message"`
-	ExpectedReasoning  bool   `json:"expected_is_reasoning"`
+	Prompt            string `json:"prompt"`
+	SystemMessage     string `json:"system_message"`
+	ExpectedReasoning bool   `json:"expected_is_reasoning"`
 }
 
 func loadCorpus(t *testing.T) *parityCorpus {

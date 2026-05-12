@@ -17,11 +17,11 @@ import (
 )
 
 type Config struct {
-	Path        string        // active log file
-	MaxBytes    int64         // rotate when active file >= MaxBytes
-	Keep        int           // keep N archives
-	CheckEvery  time.Duration // poll interval; 0 disables background loop
-	NowFunc     func() time.Time
+	Path       string        // active log file
+	MaxBytes   int64         // rotate when active file >= MaxBytes
+	Keep       int           // keep N archives
+	CheckEvery time.Duration // poll interval; 0 disables background loop
+	NowFunc    func() time.Time
 }
 
 type Maintainer struct {

@@ -19,8 +19,8 @@ import (
 
 	"github.com/qiangli/nadir/cache"
 	"github.com/qiangli/nadir/classifier"
-	"github.com/qiangli/nadir/internal/config"
 	"github.com/qiangli/nadir/health"
+	"github.com/qiangli/nadir/internal/config"
 	"github.com/qiangli/nadir/internal/metrics"
 	"github.com/qiangli/nadir/provider/fake"
 	"github.com/qiangli/nadir/ratelimit"
@@ -39,16 +39,16 @@ func newE2EFixture(t *testing.T, authToken string) *Server {
 		UserRateLimit:  10000,
 		UserRateWindow: 60_000_000_000,
 		ProviderForModel: map[string]string{
-			"haiku":                     "primary",
-			"sonnet":                    "primary",
-			"opus":                      "primary",
-			"claude-haiku-4-5-20251001": "primary",
+			"haiku":                      "primary",
+			"sonnet":                     "primary",
+			"opus":                       "primary",
+			"claude-haiku-4-5-20251001":  "primary",
 			"claude-sonnet-4-5-20250929": "primary",
-			"claude-opus-4-6-20250918":  "primary",
-			"gpt-4.1":                   "primary",
-			"gpt-4o":                    "primary",
-			"gpt-4o-mini":               "primary",
-			"gemini-2.5-flash":          "primary",
+			"claude-opus-4-6-20250918":   "primary",
+			"gpt-4.1":                    "primary",
+			"gpt-4o":                     "primary",
+			"gpt-4o-mini":                "primary",
+			"gemini-2.5-flash":           "primary",
 		},
 	}
 	cls := classifier.NewHeuristic(classifier.Thresholds{Simple: 0.35, Complex: 0.65, HasMid: true})
@@ -189,7 +189,7 @@ func TestE2E_ResponseIDIsUnique(t *testing.T) {
 	seen := map[string]bool{}
 	for i := range 5 {
 		w := sendChat(srv, map[string]any{
-			"model": "sonnet", // skip cache via per-iter content
+			"model":    "sonnet", // skip cache via per-iter content
 			"messages": []map[string]any{{"role": "user", "content": "unique " + strings.Repeat("x", i+1)}},
 		}, nil)
 		var resp types.ChatResponse

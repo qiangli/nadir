@@ -49,21 +49,21 @@ type Tool struct {
 // fields pass through via Extra so we don't drop provider-specific
 // hints (Anthropic cache_control, Gemini system_instruction, etc.).
 type ChatRequest struct {
-	Model            string                 `json:"model"`
-	Messages         []Message              `json:"messages"`
-	Stream           bool                   `json:"stream,omitempty"`
-	Temperature      *float64               `json:"temperature,omitempty"`
-	TopP             *float64               `json:"top_p,omitempty"`
-	MaxTokens        *int                   `json:"max_tokens,omitempty"`
-	N                *int                   `json:"n,omitempty"`
-	Stop             json.RawMessage        `json:"stop,omitempty"`
-	PresencePenalty  *float64               `json:"presence_penalty,omitempty"`
-	FrequencyPenalty *float64               `json:"frequency_penalty,omitempty"`
-	User             string                 `json:"user,omitempty"`
-	Tools            []Tool                 `json:"tools,omitempty"`
-	ToolChoice       json.RawMessage        `json:"tool_choice,omitempty"`
-	ResponseFormat   json.RawMessage        `json:"response_format,omitempty"`
-	Extra            map[string]any         `json:"-"`
+	Model            string          `json:"model"`
+	Messages         []Message       `json:"messages"`
+	Stream           bool            `json:"stream,omitempty"`
+	Temperature      *float64        `json:"temperature,omitempty"`
+	TopP             *float64        `json:"top_p,omitempty"`
+	MaxTokens        *int            `json:"max_tokens,omitempty"`
+	N                *int            `json:"n,omitempty"`
+	Stop             json.RawMessage `json:"stop,omitempty"`
+	PresencePenalty  *float64        `json:"presence_penalty,omitempty"`
+	FrequencyPenalty *float64        `json:"frequency_penalty,omitempty"`
+	User             string          `json:"user,omitempty"`
+	Tools            []Tool          `json:"tools,omitempty"`
+	ToolChoice       json.RawMessage `json:"tool_choice,omitempty"`
+	ResponseFormat   json.RawMessage `json:"response_format,omitempty"`
+	Extra            map[string]any  `json:"-"`
 }
 
 // ChatResponse is the OpenAI /v1/chat/completions non-streaming response.
@@ -102,9 +102,9 @@ type StreamChunk struct {
 }
 
 type StreamChoice struct {
-	Index        int            `json:"index"`
-	Delta        StreamDelta    `json:"delta"`
-	FinishReason string         `json:"finish_reason,omitempty"`
+	Index        int         `json:"index"`
+	Delta        StreamDelta `json:"delta"`
+	FinishReason string      `json:"finish_reason,omitempty"`
 }
 
 type StreamDelta struct {
@@ -130,14 +130,14 @@ type RouteDecision struct {
 // the user-visible text, image/tool flags, and timing data the router
 // uses for modifier decisions.
 type RequestMeta struct {
-	UserText    string
-	SystemText  string
-	HasImages   bool
-	HasTools    bool
-	ToolNames   []string
+	UserText     string
+	SystemText   string
+	HasImages    bool
+	HasTools     bool
+	ToolNames    []string
 	MessageCount int
-	TotalChars  int
-	Received    time.Time
+	TotalChars   int
+	Received     time.Time
 }
 
 // User identifies the caller for rate-limiting, budget tracking, and

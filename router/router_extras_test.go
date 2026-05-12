@@ -14,17 +14,17 @@ import (
 
 	"github.com/qiangli/nadir/cache"
 	"github.com/qiangli/nadir/classifier"
-	
+
 	"github.com/qiangli/nadir/health"
 	"github.com/qiangli/nadir/types"
 )
 
 func buildRouter(midConfigured bool, reasoning string) *Router {
 	cfg := &Config{
-		SimpleModel:    "haiku",
-		ComplexModel:   "opus",
-		ReasoningModel: reasoning,
-		TierThresholds: [2]float64{0.35, 0.65},
+		SimpleModel:      "haiku",
+		ComplexModel:     "opus",
+		ReasoningModel:   reasoning,
+		TierThresholds:   [2]float64{0.35, 0.65},
 		ProviderForModel: map[string]string{"haiku": "x", "opus": "x"},
 	}
 	if midConfigured {
@@ -80,9 +80,9 @@ func TestRouterImageContentForcesVisionModel(t *testing.T) {
 	// Set up a config where the complex model is vision-capable
 	// (contains "claude" → modelHasVision()=true) but simple is not.
 	cfg := &Config{
-		SimpleModel:    "haiku-text",
-		ComplexModel:   "claude-vision",
-		TierThresholds: [2]float64{0.35, 0.65},
+		SimpleModel:      "haiku-text",
+		ComplexModel:     "claude-vision",
+		TierThresholds:   [2]float64{0.35, 0.65},
 		ProviderForModel: map[string]string{"haiku-text": "x", "claude-vision": "x"},
 	}
 	thresh := classifier.Thresholds{Simple: 0.35, Complex: 0.65}

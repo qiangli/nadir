@@ -3,8 +3,8 @@
 // modifiers applied. The pipeline mirrors
 // priorart/NadirClaw/nadirclaw/routing.py:
 //
-//   profile → alias → classify → modifiers (agentic / reasoning /
-//   vision) → session-cache upgrade → provider-health reorder.
+//	profile → alias → classify → modifiers (agentic / reasoning /
+//	vision) → session-cache upgrade → provider-health reorder.
 package router
 
 import (
@@ -260,11 +260,11 @@ func modelHasVision(model string) bool {
 // meta is the local extracted-request bag — duplicated from types.RequestMeta
 // with router-specific fields so we don't widen the public type.
 type meta struct {
-	UserText      string
-	SystemText    string
-	HasImages     bool
-	HasTools      bool
-	HasAgentRole  bool
+	UserText       string
+	SystemText     string
+	HasImages      bool
+	HasTools       bool
+	HasAgentRole   bool
 	WantsReasoning bool
 }
 

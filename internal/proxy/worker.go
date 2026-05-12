@@ -14,12 +14,12 @@ import (
 // log entries are dropped (with a slog.Warn) rather than blocking the
 // hot path.
 type loggerPool struct {
-	logger   *slog.Logger
-	stores   []types.RequestLogger
-	ch       chan *types.RequestEntry
-	wg       sync.WaitGroup
-	cancel   context.CancelFunc
-	dropped  uint64
+	logger    *slog.Logger
+	stores    []types.RequestLogger
+	ch        chan *types.RequestEntry
+	wg        sync.WaitGroup
+	cancel    context.CancelFunc
+	dropped   uint64
 	closeOnce sync.Once
 }
 

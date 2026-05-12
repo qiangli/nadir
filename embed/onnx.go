@@ -17,12 +17,12 @@ import (
 // share across goroutines: the tokenizer is read-only and ORT
 // AdvancedSession serialises Run() internally.
 type embedder struct {
-	tok      *Tokenizer
-	session  *ort.DynamicAdvancedSession
-	maxLen   int
-	dim      int
-	closeMu  sync.Mutex
-	closed   bool
+	tok     *Tokenizer
+	session *ort.DynamicAdvancedSession
+	maxLen  int
+	dim     int
+	closeMu sync.Mutex
+	closed  bool
 }
 
 const embeddingDim = 384

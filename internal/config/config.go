@@ -30,16 +30,16 @@ func (c *Config) RouterConfig() *router.Config {
 
 type Config struct {
 	// Server
-	Addr       string
-	AuthToken  string
-	MaxBodyMB  int
+	Addr      string
+	AuthToken string
+	MaxBodyMB int
 
 	// Routing
-	SimpleModel   string
-	MidModel      string
-	ComplexModel  string
+	SimpleModel    string
+	MidModel       string
+	ComplexModel   string
 	ReasoningModel string
-	FallbackChain []string
+	FallbackChain  []string
 	TierThresholds [2]float64 // simple ceiling, complex floor
 
 	// Rate limiting
@@ -51,11 +51,11 @@ type Config struct {
 	CacheTTL     time.Duration
 
 	// Providers
-	OpenAIBaseURL    string
-	OpenAIAPIKey     string
-	AnthropicAPIKey  string
-	GoogleAPIKey     string
-	OllamaBaseURL    string
+	OpenAIBaseURL   string
+	OpenAIAPIKey    string
+	AnthropicAPIKey string
+	GoogleAPIKey    string
+	OllamaBaseURL   string
 
 	// Cascading classifier (defense-in-depth: ask a small LLM for a
 	// second opinion when the primary embedding/heuristic is uncertain).
@@ -80,24 +80,24 @@ type Config struct {
 // stand-alone configs.
 func Load() *Config {
 	c := &Config{
-		Addr:          getEnv("NADIR_ADDR", ":8856"),
-		AuthToken:     os.Getenv("NADIR_AUTH_TOKEN"),
-		MaxBodyMB:     getEnvInt("NADIR_MAX_BODY_MB", 20),
-		SimpleModel:   getEnv("NADIR_SIMPLE_MODEL", "gpt-4o-mini"),
-		MidModel:      os.Getenv("NADIR_MID_MODEL"),
-		ComplexModel:  getEnv("NADIR_COMPLEX_MODEL", "gpt-4o"),
-		ReasoningModel: os.Getenv("NADIR_REASONING_MODEL"),
-		FallbackChain:  splitComma(os.Getenv("NADIR_FALLBACK_CHAIN")),
-		TierThresholds: getEnvThresholds("NADIR_TIER_THRESHOLDS", [2]float64{0.35, 0.65}),
-		UserRateWindow: getEnvDuration("NADIR_RATE_WINDOW", time.Minute),
-		UserRateLimit:  getEnvInt("NADIR_RATE_LIMIT", 120),
-		CacheMaxSize:   getEnvInt("NADIR_CACHE_MAX_SIZE", 256),
-		CacheTTL:       getEnvDuration("NADIR_CACHE_TTL", 30*time.Minute),
-		OpenAIBaseURL:  os.Getenv("NADIR_OPENAI_BASE_URL"),
-		OpenAIAPIKey:   os.Getenv("NADIR_OPENAI_API_KEY"),
+		Addr:            getEnv("NADIR_ADDR", ":8856"),
+		AuthToken:       os.Getenv("NADIR_AUTH_TOKEN"),
+		MaxBodyMB:       getEnvInt("NADIR_MAX_BODY_MB", 20),
+		SimpleModel:     getEnv("NADIR_SIMPLE_MODEL", "gpt-4o-mini"),
+		MidModel:        os.Getenv("NADIR_MID_MODEL"),
+		ComplexModel:    getEnv("NADIR_COMPLEX_MODEL", "gpt-4o"),
+		ReasoningModel:  os.Getenv("NADIR_REASONING_MODEL"),
+		FallbackChain:   splitComma(os.Getenv("NADIR_FALLBACK_CHAIN")),
+		TierThresholds:  getEnvThresholds("NADIR_TIER_THRESHOLDS", [2]float64{0.35, 0.65}),
+		UserRateWindow:  getEnvDuration("NADIR_RATE_WINDOW", time.Minute),
+		UserRateLimit:   getEnvInt("NADIR_RATE_LIMIT", 120),
+		CacheMaxSize:    getEnvInt("NADIR_CACHE_MAX_SIZE", 256),
+		CacheTTL:        getEnvDuration("NADIR_CACHE_TTL", 30*time.Minute),
+		OpenAIBaseURL:   os.Getenv("NADIR_OPENAI_BASE_URL"),
+		OpenAIAPIKey:    os.Getenv("NADIR_OPENAI_API_KEY"),
 		AnthropicAPIKey: os.Getenv("NADIR_ANTHROPIC_API_KEY"),
-		GoogleAPIKey:   os.Getenv("NADIR_GOOGLE_API_KEY"),
-		OllamaBaseURL:  getEnv("NADIR_OLLAMA_BASE_URL", "http://localhost:11434/v1"),
+		GoogleAPIKey:    os.Getenv("NADIR_GOOGLE_API_KEY"),
+		OllamaBaseURL:   getEnv("NADIR_OLLAMA_BASE_URL", "http://localhost:11434/v1"),
 
 		// Cascade defaults: OFF unless CASCADE_THRESHOLD > 0. When
 		// enabled, the LLM model defaults to a small Ollama model so

@@ -12,11 +12,11 @@ import (
 // stubClassifier returns canned results so we can drive Cascading
 // through every branch without booting Ollama or an embedding model.
 type stubClassifier struct {
-	tier   types.Tier
-	score  float64
-	conf   float64
-	err    error
-	calls  int
+	tier  types.Tier
+	score float64
+	conf  float64
+	err   error
+	calls int
 }
 
 func (s *stubClassifier) Warmup(_ context.Context) error { return nil }

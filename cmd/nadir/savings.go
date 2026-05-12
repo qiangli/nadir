@@ -10,9 +10,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/qiangli/nadir/modelmeta"
 	"github.com/qiangli/nadir/internal/savings"
 	"github.com/qiangli/nadir/internal/store/sqlite"
+	"github.com/qiangli/nadir/modelmeta"
 )
 
 func newSavingsCmd() *cobra.Command {

@@ -5,13 +5,19 @@ BINDIR  := bin
 GOFLAGS := -trimpath
 LDFLAGS := -s -w
 
-.PHONY: help tidy build build-onnx test test-onnx clean
+.PHONY: help tidy fmt vet build build-onnx test test-onnx clean
 
 help: ## Show this help (default target)
 	@awk 'BEGIN {FS = ":.*?## "; printf "\nUsage: make <target>\n\nTargets:\n"} \
 		/^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-tidy: ## Run go mod tidy
+fmt: ## Format Go code (gofmt -s on all packages)
+	gofmt -s -w .
+
+vet: ## Run go vet on all packages
+	go vet ./...
+
+tidy: fmt vet ## Run gofmt -s, go vet, and go mod tidy
 	go mod tidy
 
 build: ## Build the default binary (heuristic classifier, no ML deps)

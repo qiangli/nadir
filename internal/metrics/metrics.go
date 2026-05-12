@@ -18,14 +18,14 @@ import (
 type Collectors struct {
 	reg *prometheus.Registry
 
-	Requests       *prometheus.CounterVec
-	LatencyMs      *prometheus.HistogramVec
-	PromptTokens   *prometheus.CounterVec
+	Requests         *prometheus.CounterVec
+	LatencyMs        *prometheus.HistogramVec
+	PromptTokens     *prometheus.CounterVec
 	CompletionTokens *prometheus.CounterVec
-	CostUSD        *prometheus.CounterVec
-	CacheHits      prometheus.Counter
-	CacheMisses    prometheus.Counter
-	Fallbacks      *prometheus.CounterVec
+	CostUSD          *prometheus.CounterVec
+	CacheHits        prometheus.Counter
+	CacheMisses      prometheus.Counter
+	Fallbacks        *prometheus.CounterVec
 }
 
 func New() *Collectors {

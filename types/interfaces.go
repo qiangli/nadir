@@ -49,9 +49,9 @@ type PromptCache interface {
 }
 
 type CacheStats struct {
-	Size     int
-	Hits     uint64
-	Misses   uint64
+	Size      int
+	Hits      uint64
+	Misses    uint64
 	Evictions uint64
 }
 

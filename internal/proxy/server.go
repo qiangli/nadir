@@ -26,23 +26,23 @@ import (
 )
 
 type Deps struct {
-	Logger       *slog.Logger
-	Router       types.Router
-	Classifier   types.Classifier
-	Providers    map[string]types.LLMClient // keyed by provider name
-	PromptCache  types.PromptCache
-	UserLimiter  types.UserRateLimiter
-	ModelLimiter types.ModelRateLimiter
-	Health       types.ProviderHealth
+	Logger          *slog.Logger
+	Router          types.Router
+	Classifier      types.Classifier
+	Providers       map[string]types.LLMClient // keyed by provider name
+	PromptCache     types.PromptCache
+	UserLimiter     types.UserRateLimiter
+	ModelLimiter    types.ModelRateLimiter
+	Health          types.ProviderHealth
 	ModelToProvider func(model string) string
-	AuthToken    string
-	PerCallTimeout time.Duration
-	MaxBodyBytes int64
+	AuthToken       string
+	PerCallTimeout  time.Duration
+	MaxBodyBytes    int64
 
 	// Phase 2 wiring (all optional — proxy works without them).
-	Metrics     *metrics.Collectors
-	Loggers     []types.RequestLogger
-	Budget      types.Budget
+	Metrics *metrics.Collectors
+	Loggers []types.RequestLogger
+	Budget  types.Budget
 
 	// ClassifierLabel is surfaced in /health for monitoring so
 	// dashboards can alert when a deploy flips to a degraded mode.
@@ -413,4 +413,3 @@ func (s *Server) pickProvider(model string) (types.LLMClient, error) {
 	}
 	return client, nil
 }
-
