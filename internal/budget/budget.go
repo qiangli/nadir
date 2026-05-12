@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qiangli/nadir/internal/modelmeta"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/modelmeta"
+	"github.com/qiangli/nadir/types"
 )
 
 func formatF(f float64) string {

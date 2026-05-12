@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // mockEmbedder maps a prompt → fixed embedding via a lookup table.

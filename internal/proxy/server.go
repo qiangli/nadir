@@ -22,7 +22,7 @@ import (
 	chimw "github.com/go-chi/chi/v5/middleware"
 
 	"github.com/qiangli/nadir/internal/metrics"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 type Deps struct {

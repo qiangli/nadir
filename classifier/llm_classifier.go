@@ -17,7 +17,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 const llmClassifyPrompt = `You classify the complexity of a user request for routing to either a cheap or expensive language model.

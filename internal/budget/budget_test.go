@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qiangli/nadir/internal/modelmeta"
+	"github.com/qiangli/nadir/modelmeta"
 )
 
 func TestAllowedAndRecord(t *testing.T) {

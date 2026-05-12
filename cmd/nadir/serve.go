@@ -15,19 +15,19 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/qiangli/nadir/internal/budget"
-	"github.com/qiangli/nadir/internal/cache"
-	"github.com/qiangli/nadir/internal/classifier"
+	"github.com/qiangli/nadir/cache"
+	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/health"
+	"github.com/qiangli/nadir/health"
 	"github.com/qiangli/nadir/internal/metrics"
-	"github.com/qiangli/nadir/internal/modelmeta"
-	"github.com/qiangli/nadir/internal/provider/openai"
+	"github.com/qiangli/nadir/modelmeta"
+	"github.com/qiangli/nadir/provider/openai"
 	"github.com/qiangli/nadir/internal/proxy"
-	"github.com/qiangli/nadir/internal/ratelimit"
-	"github.com/qiangli/nadir/internal/router"
+	"github.com/qiangli/nadir/ratelimit"
+	"github.com/qiangli/nadir/router"
 	"github.com/qiangli/nadir/internal/store/jsonl"
 	"github.com/qiangli/nadir/internal/store/sqlite"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func newServeCmd() *cobra.Command {
@@ -62,7 +62,7 @@ func runServe(ctx context.Context) error {
 	userLimit := ratelimit.NewUser(cfg.UserRateWindow, cfg.UserRateLimit)
 	modelLimit := ratelimit.NewModel()
 
-	rt := router.New(cfg, cls, sess, tracker)
+	rt := router.New(cfg.RouterConfig(), cls, sess, tracker)
 
 	providers, err := buildProviders(cfg)
 	if err != nil {

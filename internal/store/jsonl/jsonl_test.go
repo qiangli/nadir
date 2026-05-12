@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func TestWriterAppendsLines(t *testing.T) {

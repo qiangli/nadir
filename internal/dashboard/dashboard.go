@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/qiangli/nadir/internal/budget"
-	"github.com/qiangli/nadir/internal/modelmeta"
+	"github.com/qiangli/nadir/modelmeta"
 	"github.com/qiangli/nadir/internal/savings"
 	"github.com/qiangli/nadir/internal/store/sqlite"
 )

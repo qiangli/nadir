@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/qiangli/nadir/internal/modelmeta"
+	"github.com/qiangli/nadir/modelmeta"
 )
 
 func newModelsCmd() *cobra.Command {

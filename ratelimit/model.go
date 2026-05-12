@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 type Model struct {

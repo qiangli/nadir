@@ -9,14 +9,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/cache"
-	"github.com/qiangli/nadir/internal/classifier"
+	"github.com/qiangli/nadir/cache"
+	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/health"
-	"github.com/qiangli/nadir/internal/provider/fake"
-	"github.com/qiangli/nadir/internal/ratelimit"
-	"github.com/qiangli/nadir/internal/router"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/health"
+	"github.com/qiangli/nadir/provider/fake"
+	"github.com/qiangli/nadir/ratelimit"
+	"github.com/qiangli/nadir/router"
+	"github.com/qiangli/nadir/types"
 )
 
 type fixture struct {
@@ -48,7 +48,7 @@ func newFixture(t *testing.T) *fixture {
 	}
 	cls := classifier.NewHeuristic(classifier.Thresholds{Simple: 0.35, Complex: 0.65, HasMid: true})
 	tracker := health.New()
-	rt := router.New(cfg, cls, cache.NewSession(0), tracker)
+	rt := router.New(cfg.RouterConfig(), cls, cache.NewSession(0), tracker)
 	primary := &fake.OK{NameStr: "primary", Content: "hello from primary"}
 	fallback := &fake.OK{NameStr: "fallback", Content: "hello from fallback"}
 

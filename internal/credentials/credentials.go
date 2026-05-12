@@ -1,7 +1,7 @@
 // Package credentials persists provider API keys to
 // ~/.nadir/credentials.json. In v1 this is a static-key store — OAuth
 // support (refresh tokens, device codes) is the Phase 5 expansion of
-// the TokenProvider interface defined in internal/types.
+// the TokenProvider interface defined in github.com/qiangli/nadir/types.
 package credentials
 
 import (
@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 type Store struct {

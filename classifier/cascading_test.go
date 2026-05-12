@@ -6,7 +6,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // stubClassifier returns canned results so we can drive Cascading

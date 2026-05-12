@@ -9,11 +9,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/qiangli/nadir/internal/embed"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/embed"
+	"github.com/qiangli/nadir/types"
 )
 
-// Embedder is the seam between this package and internal/embed.
+// Embedder is the seam between this package and github.com/qiangli/nadir/embed.
 // Kept local so the classifier doesn't import embed transitively in
 // tests where we substitute a mock.
 type Embedder interface {

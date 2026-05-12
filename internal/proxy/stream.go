@@ -8,7 +8,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // streamWithFallback runs the streaming fallback loop. The semantics

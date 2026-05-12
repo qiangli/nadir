@@ -20,7 +20,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 type Cascading struct {

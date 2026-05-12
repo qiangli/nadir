@@ -8,8 +8,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/qiangli/nadir/internal/classifier"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/classifier"
+	"github.com/qiangli/nadir/types"
 )
 
 // buildPrimary (-tags onnx build) requires ONNX. There is no silent

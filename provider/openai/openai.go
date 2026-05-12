@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 const defaultBaseURL = "https://api.openai.com/v1"

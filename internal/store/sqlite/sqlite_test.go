@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func newStore(t *testing.T) *Store {

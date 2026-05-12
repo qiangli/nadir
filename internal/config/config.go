@@ -10,7 +10,23 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/qiangli/nadir/router"
 )
+
+// RouterConfig projects the binary's superset config down to the
+// library-facing router.Config that the Router actually consumes.
+func (c *Config) RouterConfig() *router.Config {
+	return &router.Config{
+		SimpleModel:      c.SimpleModel,
+		MidModel:         c.MidModel,
+		ComplexModel:     c.ComplexModel,
+		ReasoningModel:   c.ReasoningModel,
+		FallbackChain:    c.FallbackChain,
+		TierThresholds:   c.TierThresholds,
+		ProviderForModel: c.ProviderForModel,
+	}
+}
 
 type Config struct {
 	// Server

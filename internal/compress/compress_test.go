@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func msg(role, content string) types.Message {

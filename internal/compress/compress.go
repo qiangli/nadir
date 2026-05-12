@@ -15,7 +15,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 type Config struct {

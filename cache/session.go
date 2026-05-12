@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // Session pins (system + first-user-message) → (model, tier). It

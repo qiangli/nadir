@@ -4,10 +4,10 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/qiangli/nadir/internal/classifier"
+	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/provider/openai"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/provider/openai"
+	"github.com/qiangli/nadir/types"
 )
 
 // activeClassifier carries the assembled classifier plus a short

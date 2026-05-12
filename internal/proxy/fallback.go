@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // completeWithFallback runs the fallback loop for non-streaming

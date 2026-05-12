@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/qiangli/nadir/internal/store/jsonl"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func TestRotateGzipsAndPrunes(t *testing.T) {

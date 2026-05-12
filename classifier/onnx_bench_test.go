@@ -10,7 +10,7 @@ package classifier
 //
 //   NADIR_ONNXRUNTIME_PATH=/opt/homebrew/lib/libonnxruntime.dylib \
 //     go test -tags onnx -bench BenchmarkONNXClassify -benchtime=10s \
-//     -run '^$' ./internal/classifier/
+//     -run '^$' ./classifier/
 
 import (
 	"context"

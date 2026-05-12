@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func TestHeuristicClassifyShortPrompt(t *testing.T) {

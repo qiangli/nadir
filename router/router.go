@@ -14,13 +14,12 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/qiangli/nadir/internal/classifier"
-	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/classifier"
+	"github.com/qiangli/nadir/types"
 )
 
 type Router struct {
-	cfg        *config.Config
+	cfg        *Config
 	classifier types.Classifier
 	session    types.SessionCache
 	health     types.ProviderHealth
@@ -28,7 +27,10 @@ type Router struct {
 	thresholds classifier.Thresholds
 }
 
-func New(cfg *config.Config, c types.Classifier, sess types.SessionCache, h types.ProviderHealth) *Router {
+// New wires up a Router with the given config + classifier + caches.
+// session and health may be nil — the router gracefully skips the
+// session-pin and health-reorder steps when they're absent.
+func New(cfg *Config, c types.Classifier, sess types.SessionCache, h types.ProviderHealth) *Router {
 	t := classifier.Thresholds{
 		Simple:  cfg.TierThresholds[0],
 		Complex: cfg.TierThresholds[1],

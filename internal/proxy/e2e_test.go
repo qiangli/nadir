@@ -17,15 +17,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/cache"
-	"github.com/qiangli/nadir/internal/classifier"
+	"github.com/qiangli/nadir/cache"
+	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/health"
+	"github.com/qiangli/nadir/health"
 	"github.com/qiangli/nadir/internal/metrics"
-	"github.com/qiangli/nadir/internal/provider/fake"
-	"github.com/qiangli/nadir/internal/ratelimit"
-	"github.com/qiangli/nadir/internal/router"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/provider/fake"
+	"github.com/qiangli/nadir/ratelimit"
+	"github.com/qiangli/nadir/router"
+	"github.com/qiangli/nadir/types"
 )
 
 func newE2EFixture(t *testing.T, authToken string) *Server {
@@ -53,7 +53,7 @@ func newE2EFixture(t *testing.T, authToken string) *Server {
 	}
 	cls := classifier.NewHeuristic(classifier.Thresholds{Simple: 0.35, Complex: 0.65, HasMid: true})
 	tracker := health.New()
-	rt := router.New(cfg, cls, cache.NewSession(0), tracker)
+	rt := router.New(cfg.RouterConfig(), cls, cache.NewSession(0), tracker)
 	primary := &fake.OK{NameStr: "primary", Content: "OK"}
 
 	return New(Deps{
@@ -136,7 +136,7 @@ func TestE2E_BearerGrantsAccess(t *testing.T) {
 // ============================================================
 
 // Alias assertions track priorart/NadirClaw/.../routing.py MODEL_ALIASES
-// verbatim. Parity is enforced by internal/router/parity_test.go.
+// verbatim. Parity is enforced by router/parity_test.go.
 
 func TestE2E_AliasSonnetResolves(t *testing.T) {
 	srv := newE2EFixture(t, "")

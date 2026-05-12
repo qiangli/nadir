@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/qiangli/nadir/internal/store/sqlite"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 func newSeededStore(t *testing.T) *sqlite.Store {

@@ -6,15 +6,14 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/qiangli/nadir/internal/cache"
-	"github.com/qiangli/nadir/internal/classifier"
-	"github.com/qiangli/nadir/internal/config"
-	"github.com/qiangli/nadir/internal/health"
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/cache"
+	"github.com/qiangli/nadir/classifier"
+	"github.com/qiangli/nadir/health"
+	"github.com/qiangli/nadir/types"
 )
 
 func newTestRouter() *Router {
-	cfg := &config.Config{
+	cfg := &Config{
 		SimpleModel:    "haiku",
 		MidModel:       "sonnet",
 		ComplexModel:   "opus",

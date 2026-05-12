@@ -11,7 +11,7 @@ package classifier
 // Build + run:
 //
 //   export NADIR_ONNXRUNTIME_PATH=/opt/homebrew/lib/libonnxruntime.dylib
-//   go test -tags onnx -run TestONNXGolden -v ./internal/classifier/
+//   go test -tags onnx -run TestONNXGolden -v ./classifier/
 
 import (
 	"context"

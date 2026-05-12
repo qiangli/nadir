@@ -16,7 +16,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/qiangli/nadir/internal/types"
+	"github.com/qiangli/nadir/types"
 )
 
 // Thresholds bucket a score into (simple, mid, complex). Defaults are
