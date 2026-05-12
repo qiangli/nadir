@@ -1,0 +1,402 @@
+[
+  {
+    "prompt": "What is the capital of France?",
+    "score": 0.0,
+    "confidence": 0.425373,
+    "tier": "simple",
+    "sim_simple": 0.405046,
+    "sim_complex": -0.020326
+  },
+  {
+    "prompt": "Who wrote Romeo and Juliet?",
+    "score": 0.0,
+    "confidence": 0.338989,
+    "tier": "simple",
+    "sim_simple": 0.322726,
+    "sim_complex": -0.016264
+  },
+  {
+    "prompt": "What year did World War II end?",
+    "score": 0.0,
+    "confidence": 0.289667,
+    "tier": "simple",
+    "sim_simple": 0.335982,
+    "sim_complex": 0.046315
+  },
+  {
+    "prompt": "How many continents are there?",
+    "score": 0.0,
+    "confidence": 0.39721,
+    "tier": "simple",
+    "sim_simple": 0.4235,
+    "sim_complex": 0.02629
+  },
+  {
+    "prompt": "What is the chemical symbol for gold?",
+    "score": 0.0,
+    "confidence": 0.360274,
+    "tier": "simple",
+    "sim_simple": 0.384654,
+    "sim_complex": 0.024379
+  },
+  {
+    "prompt": "What language do they speak in Brazil?",
+    "score": 0.0,
+    "confidence": 0.309596,
+    "tier": "simple",
+    "sim_simple": 0.317128,
+    "sim_complex": 0.007533
+  },
+  {
+    "prompt": "Who painted the Mona Lisa?",
+    "score": 0.0,
+    "confidence": 0.311859,
+    "tier": "simple",
+    "sim_simple": 0.271423,
+    "sim_complex": -0.040436
+  },
+  {
+    "prompt": "What is the largest planet in our solar system?",
+    "score": 0.0,
+    "confidence": 0.354393,
+    "tier": "simple",
+    "sim_simple": 0.382253,
+    "sim_complex": 0.02786
+  },
+  {
+    "prompt": "What is the speed of light?",
+    "score": 0.0,
+    "confidence": 0.368282,
+    "tier": "simple",
+    "sim_simple": 0.386693,
+    "sim_complex": 0.018411
+  },
+  {
+    "prompt": "How many sides does a hexagon have?",
+    "score": 0.0,
+    "confidence": 0.306866,
+    "tier": "simple",
+    "sim_simple": 0.308008,
+    "sim_complex": 0.001142
+  },
+  {
+    "prompt": "What is 25 times 4?",
+    "score": 0.0,
+    "confidence": 0.353826,
+    "tier": "simple",
+    "sim_simple": 0.415907,
+    "sim_complex": 0.062081
+  },
+  {
+    "prompt": "Calculate 150 divided by 3",
+    "score": 0.0,
+    "confidence": 0.330276,
+    "tier": "simple",
+    "sim_simple": 0.317709,
+    "sim_complex": -0.012567
+  },
+  {
+    "prompt": "What is 17 plus 38?",
+    "score": 0.0,
+    "confidence": 0.411937,
+    "tier": "simple",
+    "sim_simple": 0.40145,
+    "sim_complex": -0.010487
+  },
+  {
+    "prompt": "What is 10% of 250?",
+    "score": 0.0,
+    "confidence": 0.231047,
+    "tier": "simple",
+    "sim_simple": 0.30194,
+    "sim_complex": 0.070893
+  },
+  {
+    "prompt": "Convert 5 kilometers to miles",
+    "score": 0.0,
+    "confidence": 0.243724,
+    "tier": "simple",
+    "sim_simple": 0.21691,
+    "sim_complex": -0.026814
+  },
+  {
+    "prompt": "Define photosynthesis",
+    "score": 0.0,
+    "confidence": 0.206967,
+    "tier": "simple",
+    "sim_simple": 0.219547,
+    "sim_complex": 0.01258
+  },
+  {
+    "prompt": "What does GDP stand for?",
+    "score": 0.0,
+    "confidence": 0.331819,
+    "tier": "simple",
+    "sim_simple": 0.364855,
+    "sim_complex": 0.033036
+  },
+  {
+    "prompt": "What is an algorithm?",
+    "score": 0.0,
+    "confidence": 0.124432,
+    "tier": "simple",
+    "sim_simple": 0.266232,
+    "sim_complex": 0.1418
+  },
+  {
+    "prompt": "Define the word 'serendipity'",
+    "score": 0.0,
+    "confidence": 0.169119,
+    "tier": "simple",
+    "sim_simple": 0.206191,
+    "sim_complex": 0.037073
+  },
+  {
+    "prompt": "What is a metaphor?",
+    "score": 0.0,
+    "confidence": 0.278771,
+    "tier": "simple",
+    "sim_simple": 0.304549,
+    "sim_complex": 0.025778
+  },
+  {
+    "prompt": "How do you say hello in Japanese?",
+    "score": 0.0,
+    "confidence": 0.486171,
+    "tier": "simple",
+    "sim_simple": 0.441057,
+    "sim_complex": -0.045114
+  },
+  {
+    "prompt": "Translate 'thank you' to Spanish",
+    "score": 0.0,
+    "confidence": 0.296807,
+    "tier": "simple",
+    "sim_simple": 0.301111,
+    "sim_complex": 0.004304
+  },
+  {
+    "prompt": "What is 'goodbye' in French?",
+    "score": 0.0,
+    "confidence": 0.412651,
+    "tier": "simple",
+    "sim_simple": 0.354331,
+    "sim_complex": -0.058321
+  },
+  {
+    "prompt": "Is Python a compiled language?",
+    "score": 0.0,
+    "confidence": 0.346747,
+    "tier": "simple",
+    "sim_simple": 0.366438,
+    "sim_complex": 0.019691
+  },
+  {
+    "prompt": "Does the Earth revolve around the Sun?",
+    "score": 0.0,
+    "confidence": 0.379506,
+    "tier": "simple",
+    "sim_simple": 0.351526,
+    "sim_complex": -0.027979
+  },
+  {
+    "prompt": "Design a microservices architecture for a real-time multiplayer game with matchmaking, leaderboards, and anti-cheat systems",
+    "score": 1.0,
+    "confidence": 0.368995,
+    "tier": "complex",
+    "sim_simple": 0.085008,
+    "sim_complex": 0.454003
+  },
+  {
+    "prompt": "Architect a distributed event-sourcing system for a financial trading platform that handles millions of transactions per second",
+    "score": 1.0,
+    "confidence": 0.449986,
+    "tier": "complex",
+    "sim_simple": 0.0761,
+    "sim_complex": 0.526086
+  },
+  {
+    "prompt": "Design a scalable notification system that supports push, email, SMS, and in-app channels with user preferences and rate limiting",
+    "score": 1.0,
+    "confidence": 0.376272,
+    "tier": "complex",
+    "sim_simple": 0.063792,
+    "sim_complex": 0.440064
+  },
+  {
+    "prompt": "Create a system design for a URL shortener that handles 100 million daily requests with analytics",
+    "score": 1.0,
+    "confidence": 0.362656,
+    "tier": "complex",
+    "sim_simple": 0.089393,
+    "sim_complex": 0.452048
+  },
+  {
+    "prompt": "Explain the trade-offs between consistency and availability in distributed systems, using real-world examples from companies like Netflix and Amazon",
+    "score": 1.0,
+    "confidence": 0.466156,
+    "tier": "complex",
+    "sim_simple": -0.011012,
+    "sim_complex": 0.455144
+  },
+  {
+    "prompt": "Compare and contrast the CAP theorem implications for SQL vs NoSQL databases in a microservices context, then recommend an approach for an e-commerce platform",
+    "score": 1.0,
+    "confidence": 0.421686,
+    "tier": "complex",
+    "sim_simple": 0.02745,
+    "sim_complex": 0.449136
+  },
+  {
+    "prompt": "Analyze the economic impacts of remote work adoption on urban real estate markets, transportation infrastructure, and local businesses",
+    "score": 1.0,
+    "confidence": 0.147951,
+    "tier": "complex",
+    "sim_simple": -0.020527,
+    "sim_complex": 0.127424
+  },
+  {
+    "prompt": "Walk me through the reasoning behind choosing between a monolithic and microservices architecture for a startup's MVP",
+    "score": 1.0,
+    "confidence": 0.482777,
+    "tier": "complex",
+    "sim_simple": -0.020524,
+    "sim_complex": 0.462253
+  },
+  {
+    "prompt": "Implement a thread-safe LRU cache in Python with TTL support, size limits, and cache statistics tracking",
+    "score": 1.0,
+    "confidence": 0.241757,
+    "tier": "complex",
+    "sim_simple": 0.10643,
+    "sim_complex": 0.348187
+  },
+  {
+    "prompt": "Write a complete REST API with authentication, rate limiting, pagination, and comprehensive error handling using FastAPI",
+    "score": 1.0,
+    "confidence": 0.429026,
+    "tier": "complex",
+    "sim_simple": 0.064012,
+    "sim_complex": 0.493038
+  },
+  {
+    "prompt": "Build a React component library with a design system that includes theming, accessibility, responsive design, and documentation",
+    "score": 1.0,
+    "confidence": 0.247384,
+    "tier": "complex",
+    "sim_simple": 0.038372,
+    "sim_complex": 0.285756
+  },
+  {
+    "prompt": "Implement a B-tree data structure with insert, delete, search, and range query operations, including rebalancing",
+    "score": 1.0,
+    "confidence": 0.32647,
+    "tier": "complex",
+    "sim_simple": 0.00983,
+    "sim_complex": 0.336301
+  },
+  {
+    "prompt": "Create a Python decorator that implements retry logic with exponential backoff, jitter, circuit breaking, and logging",
+    "score": 1.0,
+    "confidence": 0.31248,
+    "tier": "complex",
+    "sim_simple": 0.03754,
+    "sim_complex": 0.350019
+  },
+  {
+    "prompt": "Debug this memory leak in a Node.js application that occurs during WebSocket connections under high concurrency, and explain the GC implications",
+    "score": 1.0,
+    "confidence": 0.293268,
+    "tier": "complex",
+    "sim_simple": 0.063309,
+    "sim_complex": 0.356577
+  },
+  {
+    "prompt": "Optimize this SQL query that takes 30 seconds on a table with 50 million rows, considering indexing strategies, query plan analysis, and partitioning",
+    "score": 1.0,
+    "confidence": 0.197225,
+    "tier": "complex",
+    "sim_simple": 0.118557,
+    "sim_complex": 0.315782
+  },
+  {
+    "prompt": "Profile and optimize a Python data pipeline that processes 10GB CSV files, currently taking 4 hours to complete",
+    "score": 1.0,
+    "confidence": 0.27155,
+    "tier": "complex",
+    "sim_simple": 0.051471,
+    "sim_complex": 0.323021
+  },
+  {
+    "prompt": "Compare the latest transformer architectures (GPT-4, Claude, Gemini, Llama) in terms of training methodology, context handling, and real-world performance benchmarks",
+    "score": 1.0,
+    "confidence": 0.255631,
+    "tier": "complex",
+    "sim_simple": 0.003007,
+    "sim_complex": 0.258638
+  },
+  {
+    "prompt": "Synthesize the current research on quantum error correction and explain the implications for practical quantum computing timelines",
+    "score": 1.0,
+    "confidence": 0.218011,
+    "tier": "complex",
+    "sim_simple": 0.090032,
+    "sim_complex": 0.308043
+  },
+  {
+    "prompt": "Analyze the trade-offs between different consensus algorithms (Paxos, Raft, PBFT) for blockchain applications",
+    "score": 1.0,
+    "confidence": 0.315802,
+    "tier": "complex",
+    "sim_simple": 0.020197,
+    "sim_complex": 0.336
+  },
+  {
+    "prompt": "Write a short story exploring the ethical implications of AI consciousness, incorporating themes from both Eastern and Western philosophy",
+    "score": 0.588719,
+    "confidence": 0.017744,
+    "tier": "simple",
+    "sim_simple": 0.116963,
+    "sim_complex": 0.134707
+  },
+  {
+    "prompt": "Create a detailed fictional world with its own political system, economy, religion, and history spanning 1000 years",
+    "score": 0.824137,
+    "confidence": 0.064827,
+    "tier": "complex",
+    "sim_simple": 0.16808,
+    "sim_complex": 0.232908
+  },
+  {
+    "prompt": "Write a technical blog post explaining category theory concepts using cooking metaphors, targeted at software engineers",
+    "score": 1.0,
+    "confidence": 0.18699,
+    "tier": "complex",
+    "sim_simple": 0.106895,
+    "sim_complex": 0.293885
+  },
+  {
+    "prompt": "Prove that the halting problem is undecidable using a diagonalization argument, and explain the practical implications for software verification",
+    "score": 1.0,
+    "confidence": 0.16098,
+    "tier": "complex",
+    "sim_simple": 0.003929,
+    "sim_complex": 0.164909
+  },
+  {
+    "prompt": "Derive the backpropagation algorithm from first principles and explain how automatic differentiation relates to it",
+    "score": 0.84756,
+    "confidence": 0.069512,
+    "tier": "complex",
+    "sim_simple": 0.07118,
+    "sim_complex": 0.140692
+  },
+  {
+    "prompt": "Prove the correctness of Dijkstra's algorithm and analyze its time complexity under different priority queue implementations",
+    "score": 1.0,
+    "confidence": 0.217133,
+    "tier": "complex",
+    "sim_simple": 0.026144,
+    "sim_complex": 0.243277
+  }
+]

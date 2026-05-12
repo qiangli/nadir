@@ -1,0 +1,29 @@
+#
+priorart/
+
+# Go build artifacts
+/nadir
+/bin/
+*.test
+*.out
+
+# Editor + OS
+.DS_Store
+.idea/
+.vscode/
+
+# Local env
+.env
+.env.local
+
+# Python venv used by tools/export-onnx
+.venv/
+
+# Generated ONNX classifier assets — regenerate via:
+#   python tools/export-onnx/export.py
+# Includes the 87 MB model weights file plus the centroids and vocab.
+assets/
+
+# ycode runtime state
+.agents/
+

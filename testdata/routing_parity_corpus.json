@@ -1,0 +1,658 @@
+{
+  "alias": [
+    {
+      "input": "sonnet",
+      "expected": "claude-sonnet-4-5-20250929"
+    },
+    {
+      "input": "opus",
+      "expected": "claude-opus-4-6-20250918"
+    },
+    {
+      "input": "haiku",
+      "expected": "claude-haiku-4-5-20251001"
+    },
+    {
+      "input": "claude",
+      "expected": "claude-sonnet-4-5-20250929"
+    },
+    {
+      "input": "gpt4",
+      "expected": "gpt-4.1"
+    },
+    {
+      "input": "gpt4o",
+      "expected": "gpt-4o"
+    },
+    {
+      "input": "gpt4-mini",
+      "expected": "gpt-4.1-mini"
+    },
+    {
+      "input": "gpt5",
+      "expected": "gpt-5.2"
+    },
+    {
+      "input": "gpt5-mini",
+      "expected": "gpt-5-mini"
+    },
+    {
+      "input": "o3",
+      "expected": "o3"
+    },
+    {
+      "input": "o3-mini",
+      "expected": "o3-mini"
+    },
+    {
+      "input": "o4-mini",
+      "expected": "o4-mini"
+    },
+    {
+      "input": "flash",
+      "expected": "gemini-2.5-flash"
+    },
+    {
+      "input": "gemini-flash",
+      "expected": "gemini-2.5-flash"
+    },
+    {
+      "input": "gemini-pro",
+      "expected": "gemini-2.5-pro"
+    },
+    {
+      "input": "deepseek",
+      "expected": "deepseek/deepseek-chat"
+    },
+    {
+      "input": "deepseek-v4",
+      "expected": "deepseek/deepseek-v4-flash"
+    },
+    {
+      "input": "deepseek-v4-flash",
+      "expected": "deepseek/deepseek-v4-flash"
+    },
+    {
+      "input": "deepseek-v4-pro",
+      "expected": "deepseek/deepseek-v4-pro"
+    },
+    {
+      "input": "deepseek-r1",
+      "expected": "deepseek/deepseek-reasoner"
+    },
+    {
+      "input": "llama",
+      "expected": "ollama/llama3.1:8b"
+    },
+    {
+      "input": "mini",
+      "expected": null
+    },
+    {
+      "input": "SONNET",
+      "expected": "claude-sonnet-4-5-20250929"
+    },
+    {
+      "input": "Flash",
+      "expected": "gemini-2.5-flash"
+    },
+    {
+      "input": "  Haiku  ",
+      "expected": "claude-haiku-4-5-20251001"
+    },
+    {
+      "input": "unknown-model-xyz",
+      "expected": null
+    },
+    {
+      "input": "gpt-4o",
+      "expected": null
+    },
+    {
+      "input": "claude-sonnet-4-6-20250918",
+      "expected": null
+    },
+    {
+      "input": "",
+      "expected": null
+    },
+    {
+      "input": "  ",
+      "expected": null
+    }
+  ],
+  "profile": [
+    {
+      "input": "auto",
+      "expected": "auto"
+    },
+    {
+      "input": "eco",
+      "expected": "eco"
+    },
+    {
+      "input": "premium",
+      "expected": "premium"
+    },
+    {
+      "input": "free",
+      "expected": "free"
+    },
+    {
+      "input": "reasoning",
+      "expected": "reasoning"
+    },
+    {
+      "input": "ECO",
+      "expected": "eco"
+    },
+    {
+      "input": "NadirClaw/Premium",
+      "expected": "premium"
+    },
+    {
+      "input": "nadirclaw/eco",
+      "expected": "eco"
+    },
+    {
+      "input": "gpt-4o",
+      "expected": null
+    },
+    {
+      "input": "claude-sonnet",
+      "expected": null
+    },
+    {
+      "input": "",
+      "expected": null
+    },
+    {
+      "input": null,
+      "expected": null
+    }
+  ],
+  "agentic": [
+    {
+      "label": "simple_question",
+      "has_tools": false,
+      "tool_count": 0,
+      "system_prompt": "",
+      "message_count": 1,
+      "expected_is_agentic": false,
+      "raw": {
+        "is_agentic": false,
+        "confidence": 0.0,
+        "signals": []
+      }
+    },
+    {
+      "label": "tools_defined_low_count",
+      "has_tools": true,
+      "tool_count": 3,
+      "system_prompt": "",
+      "message_count": 1,
+      "expected_is_agentic": true,
+      "raw": {
+        "is_agentic": true,
+        "confidence": 0.35,
+        "signals": [
+          "tools_defined(3)"
+        ]
+      }
+    },
+    {
+      "label": "many_tools",
+      "has_tools": true,
+      "tool_count": 8,
+      "system_prompt": "",
+      "message_count": 1,
+      "expected_is_agentic": true,
+      "raw": {
+        "is_agentic": true,
+        "confidence": 0.5,
+        "signals": [
+          "tools_defined(8)",
+          "many_tools"
+        ]
+      }
+    },
+    {
+      "label": "agent_system_keywords",
+      "has_tools": false,
+      "tool_count": 0,
+      "system_prompt": "You are a coding agent. You can execute commands and read files.",
+      "message_count": 1,
+      "expected_is_agentic": false,
+      "raw": {
+        "is_agentic": false,
+        "confidence": 0.2,
+        "signals": [
+          "agentic_keywords"
+        ]
+      }
+    },
+    {
+      "label": "long_system_prompt",
+      "has_tools": false,
+      "tool_count": 0,
+      "system_prompt": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "message_count": 1,
+      "expected_is_agentic": false,
+      "raw": {
+        "is_agentic": false,
+        "confidence": 0.1,
+        "signals": [
+          "long_system_prompt"
+        ]
+      }
+    },
+    {
+      "label": "deep_conversation",
+      "has_tools": false,
+      "tool_count": 0,
+      "system_prompt": "",
+      "message_count": 12,
+      "expected_is_agentic": false,
+      "raw": {
+        "is_agentic": false,
+        "confidence": 0.1,
+        "signals": [
+          "deep_conversation"
+        ]
+      }
+    },
+    {
+      "label": "full_agentic_realistic",
+      "has_tools": true,
+      "tool_count": 4,
+      "system_prompt": "You are an AI agent. You can use tools to read and write files.",
+      "message_count": 7,
+      "expected_is_agentic": true,
+      "raw": {
+        "is_agentic": true,
+        "confidence": 0.7,
+        "signals": [
+          "tools_defined(4)",
+          "many_tools",
+          "agentic_keywords"
+        ]
+      }
+    }
+  ],
+  "reasoning": [
+    {
+      "prompt": "What is 2+2?",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 0,
+        "markers": []
+      }
+    },
+    {
+      "prompt": "Think through this problem",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Think through"
+        ]
+      }
+    },
+    {
+      "prompt": "Think through this step by step",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "step by step",
+          "Think through"
+        ]
+      }
+    },
+    {
+      "prompt": "Prove that P=NP and derive the implications step by step",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 3,
+        "markers": [
+          "Prove that",
+          "step by step",
+          "derive the"
+        ]
+      }
+    },
+    {
+      "prompt": "Critically analyze the paper and evaluate whether the conclusions are valid",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "evaluate whether",
+          "Critically analyze"
+        ]
+      }
+    },
+    {
+      "prompt": "What are the implications?",
+      "system_message": "Analyze the tradeoffs and compare and contrast the approaches",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "Analyze the tradeoffs",
+          "compare and contrast"
+        ]
+      }
+    },
+    {
+      "prompt": "Hello",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 0,
+        "markers": []
+      }
+    },
+    {
+      "prompt": "Explain why concurrent map writes are unsafe in Go",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Explain why"
+        ]
+      }
+    },
+    {
+      "prompt": "Let's reason through this carefully step by step.",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "step by step",
+          "Let's reason"
+        ]
+      }
+    },
+    {
+      "prompt": "Chain of thought: work through the constraints.",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "Chain of thought",
+          "work through"
+        ]
+      }
+    },
+    {
+      "prompt": "Mathematically prove this identity and derive the corollary.",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "derive the",
+          "Mathematically prove"
+        ]
+      }
+    },
+    {
+      "prompt": "Compare and contrast SOLID with hexagonal architecture.",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Compare and contrast"
+        ]
+      }
+    },
+    {
+      "prompt": "Evaluate whether the algorithm terminates and explain why.",
+      "system_message": "",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "explain why",
+          "Evaluate whether"
+        ]
+      }
+    },
+    {
+      "prompt": "Weigh the pros and cons of monorepo vs polyrepo.",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Weigh the pros"
+        ]
+      }
+    },
+    {
+      "prompt": "Design a system architecture for a chat application.",
+      "system_message": "Think about the tradeoffs",
+      "expected_is_reasoning": true,
+      "raw": {
+        "is_reasoning": true,
+        "marker_count": 2,
+        "markers": [
+          "Design a system",
+          "Think about"
+        ]
+      }
+    },
+    {
+      "prompt": "Logically deduce the conclusion from these premises.",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Logically deduce"
+        ]
+      }
+    },
+    {
+      "prompt": "Diagnose the root cause of the memory leak.",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Diagnose the root cause"
+        ]
+      }
+    },
+    {
+      "prompt": "Architectural decision: SQL vs document store?",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "Architectural decision"
+        ]
+      }
+    },
+    {
+      "prompt": "Hello there!",
+      "system_message": "Be helpful and concise.",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 0,
+        "markers": []
+      }
+    },
+    {
+      "prompt": "step by step",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 1,
+        "markers": [
+          "step by step"
+        ]
+      }
+    },
+    {
+      "prompt": "just explain",
+      "system_message": "",
+      "expected_is_reasoning": false,
+      "raw": {
+        "is_reasoning": false,
+        "marker_count": 0,
+        "markers": []
+      }
+    }
+  ],
+  "code_review": [
+    {
+      "prompt": "Please code review this PR",
+      "system_message": "",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    },
+    {
+      "prompt": "Review the diff and flag any issues.",
+      "system_message": "",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    },
+    {
+      "prompt": "Run a security review on this commit.",
+      "system_message": "",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    },
+    {
+      "prompt": "Static analysis pass over the module.",
+      "system_message": "",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    },
+    {
+      "prompt": "Lint check the file please.",
+      "system_message": "",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    },
+    {
+      "prompt": "Hello, what's your name?",
+      "system_message": "",
+      "expected_is_review": false,
+      "raw": {
+        "is_review": false,
+        "confidence": 0.0,
+        "signals": []
+      }
+    },
+    {
+      "prompt": "Refactor this function.",
+      "system_message": "",
+      "expected_is_review": false,
+      "raw": {
+        "is_review": false,
+        "confidence": 0.0,
+        "signals": []
+      }
+    },
+    {
+      "prompt": "",
+      "system_message": "Code review the changes when ready.",
+      "expected_is_review": true,
+      "raw": {
+        "is_review": true,
+        "confidence": 0.9,
+        "signals": [
+          "review_keywords"
+        ]
+      }
+    }
+  ],
+  "images": [
+    {
+      "label": "no_images",
+      "expected_has_images": false,
+      "raw": {
+        "has_images": false,
+        "image_count": 0
+      }
+    },
+    {
+      "label": "image_url_part",
+      "expected_has_images": false,
+      "raw": {
+        "has_images": false,
+        "image_count": 0
+      }
+    },
+    {
+      "label": "image_part_anthropic_shape",
+      "expected_has_images": false,
+      "raw": {
+        "has_images": false,
+        "image_count": 0
+      }
+    }
+  ]
+}

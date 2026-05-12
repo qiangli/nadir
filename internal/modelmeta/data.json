@@ -1,0 +1,18 @@
+{
+  "models": [
+    {"name": "gpt-4o", "input_per_1k": 0.0025, "output_per_1k": 0.01, "context": 128000, "vision": true},
+    {"name": "gpt-4o-mini", "input_per_1k": 0.00015, "output_per_1k": 0.0006, "context": 128000, "vision": true},
+    {"name": "gpt-4-turbo", "input_per_1k": 0.01, "output_per_1k": 0.03, "context": 128000, "vision": true},
+    {"name": "gpt-3.5-turbo", "input_per_1k": 0.0005, "output_per_1k": 0.0015, "context": 16000, "vision": false},
+
+    {"name": "claude-opus-4-7", "input_per_1k": 0.015, "output_per_1k": 0.075, "context": 200000, "vision": true},
+    {"name": "claude-sonnet-4-6", "input_per_1k": 0.003, "output_per_1k": 0.015, "context": 200000, "vision": true},
+    {"name": "claude-haiku-4-5", "input_per_1k": 0.0008, "output_per_1k": 0.004, "context": 200000, "vision": true},
+
+    {"name": "gemini-pro", "input_per_1k": 0.00125, "output_per_1k": 0.005, "context": 1000000, "vision": true},
+    {"name": "gemini-flash", "input_per_1k": 0.000075, "output_per_1k": 0.0003, "context": 1000000, "vision": true},
+
+    {"name": "ollama/llama3.1:8b", "input_per_1k": 0, "output_per_1k": 0, "context": 128000, "vision": false},
+    {"name": "ollama/llama3.2:3b", "input_per_1k": 0, "output_per_1k": 0, "context": 128000, "vision": false}
+  ]
+}
