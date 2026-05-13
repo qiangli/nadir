@@ -119,26 +119,9 @@ Run `go doc github.com/qiangli/nadir` (or any sub-package) for the full API.
 
 ## Skill routing
 
-`nadir` can also be used to route a prompt to a **skill / slash-command**
-instead of a model tier — same library, different output. Useful as a
-pre-dispatch step in agentic CLIs that need to pick a tool (e.g.,
-`/review`, `/security-review`, `/init`) for a user's freeform prompt.
-
-Three matchers, in increasing sophistication, all satisfying
-`skillrouter.Matcher`:
-
-| Matcher | When to use | Cost / latency | Notes |
-|---|---|---|---|
-| `skillrouter.Router` | Catalogs ≤15, prototype work | One LLM call (~300–500 ms) | LLM-only; pick a skill from a flat list |
-| `skillrouter.Semantic` | Catalogs 5–500, latency-sensitive | One Embed call (~8 ms with ONNX MiniLM) | Multi-vector prototypes per skill; nearest-neighbor on the embedding space |
-| `skillrouter.Cascade` | **Production default** | ~8 ms hot path + LLM call on the uncertain ~20% | Semantic primary + LLM rerank on the top-K shortlist; silent fallback on LLM error |
-
-The hybrid two-stage (Cascade) is the pattern the SOTA literature
-converges on — embeddings handle the easy 80%, an LLM reranks only
-when the embedding signal is weak (low absolute score *or* narrow
-margin between the top two candidates). Only the top-K nearest
-skills get passed to the LLM, so the prompt stays short regardless of
-catalog size and position bias is sidestepped.
+`nadir` also routes a prompt to a **skill / slash-command** (e.g.,
+`/review`, `/security-review`, `/init`) — same library, different
+output. Useful as a pre-dispatch step in agentic CLIs.
 
 ### Defining a skill
 
@@ -154,62 +137,101 @@ skill := nadir.Skill{
 }
 ```
 
-`Examples` are the load-bearing field for Semantic/Cascade: they're
-embedded once at startup, one prototype vector per entry, and the
-matcher scores a query against a skill via `max(cosine(query, v))` over
-its prototypes. 3–10 paraphrased examples per skill is the sweet spot
-— trigger phrases that you'd otherwise hand-write as regex go here
-instead.
+`Examples` are the load-bearing field — 3–10 paraphrases per skill is
+the sweet spot. Trigger phrases you'd otherwise hand-write as regex
+go here. The embedder generalizes paraphrases that a regex can't.
 
-### Production setup (Cascade with ONNX MiniLM)
+### Two production paths
 
 ```go
-import (
-    "github.com/qiangli/nadir"
-    "github.com/qiangli/nadir/embed"
-    "github.com/qiangli/nadir/provider/openai"
-    "github.com/qiangli/nadir/skillrouter"
-)
+// (a) No-deps default: pure-Go TF-IDF over the catalog. ~94% top-1
+// accuracy on the bundled eval corpus. ~1.6 µs per Route call.
+matcher, err := nadir.NewLexicalSkillMatcher(skills)
 
-// 1. Open the bundled ONNX MiniLM embedder (requires -tags onnx + assets/).
-emb, err := embed.Open("./assets")
-if err != nil { /* ... */ }
-
-// 2. Build the semantic primary — one-time embedding cost at startup.
-primary, err := skillrouter.NewSemantic(ctx, emb, skills,
-    skillrouter.WithMinScore(0.35),
-)
-
-// 3. Wrap in Cascade with a small local LLM for the rerank step.
+// (b) Recommended when Ollama is available: TF-IDF primary handles
+// the easy ~80% of prompts in microseconds; LLM rerank fires only
+// on the uncertain shortlist. ~97% top-1 accuracy with qwen2.5:7b.
 llm := openai.New("ollama", "http://localhost:11434/v1", "")
-matcher := skillrouter.NewCascade(primary, llm, "llama3.2:3b",
-    skillrouter.WithMinMargin(0.10),       // consult LLM when top1-top2 < 0.10
-    skillrouter.WithShortlistK(5),         // pass top-5 candidates to LLM
-    skillrouter.WithLLMTimeout(2*time.Second),
-)
+matcher, err := nadir.NewHybridSkillMatcher(ctx, llm, "qwen2.5:7b", skills)
 
+// Both return skillrouter.Matcher — same Route(ctx, prompt) interface.
 decision, _ := matcher.Route(ctx, "audit this branch for vulnerabilities")
 // decision.Skill == "/security-review"
-// decision.Confidence == top-1 cosine
-// decision.Margin     == top1 - top2 gap
-// decision.FellThrough == true iff no candidate scored above MinScore
+// decision.Confidence == top-1 score (cosine for primary, parser-derived for LLM)
+// decision.Margin     == top1 - top2 cosine gap (the cascade trigger)
+// decision.FellThrough == true iff no candidate above threshold
 ```
 
-### CLI (LLM-only Router)
+### When to pick which
+
+| Constraint | Pick |
+|---|---|
+| Static binary, no daemon, no CGO | `NewLexicalSkillMatcher` |
+| Ollama available, want best quality | `NewHybridSkillMatcher` (recommended) |
+| MiniLM-quality embeddings via Ollama, no LLM rerank | `skillrouter.NewSemantic` with `skillrouter.NewOllamaEmbedder(ctx, "http://localhost:11434", "mxbai-embed-large")` |
+| CGO available, want ONNX MiniLM | `skillrouter.NewSemantic` with `embed.Open("./assets")` (requires `-tags onnx`) |
+| Prototype / small catalog, want LLM-only routing | `nadir.NewSkillRouter` |
+
+The matchers all satisfy `skillrouter.Matcher` so they're swappable
+without changing call sites. Power-user building blocks
+(`skillrouter.NewSemantic`, `NewCascade`, `NewFusedSemantic`,
+`NewEnsemble`, `NewTFIDFFromSkills`, `NewHashEmbedder`,
+`NewOllamaEmbedder`) remain public for finer control.
+
+### Eval harness
+
+`tools/skillrouter-eval` runs a labeled corpus through every available
+embedder + composite matcher and prints a Markdown comparison
+(top-1 accuracy by hardness tier, OOD rejection, latency p50/p95).
+
+```bash
+# Default build: pure-Go + Ollama probes
+go run ./tools/skillrouter-eval
+
+# Add MiniLM-via-ONNX as a comparison row
+NADIR_ONNXRUNTIME_PATH=/opt/homebrew/lib/libonnxruntime.dylib \
+  go run -tags onnx ./tools/skillrouter-eval --assets ./assets
+
+# Override the LLM rerank model used in the Cascade row
+NADIR_CASCADE_LLM_MODEL=qwen2.5:7b go run ./tools/skillrouter-eval
+```
+
+Findings on the bundled corpus (`testdata/skillrouter_eval_corpus.json`):
+- **Cascade(TF-IDF + qwen2.5:7b)**: **97.1% top-1** — best overall.
+- **Ollama:mxbai-embed-large**: 94.1% top-1 + 100% on the hardest overlap tier — best single-call embedder.
+- **Pure-Go TF-IDF**: 94.1% top-1 at 1.6 µs — best when no Ollama is available.
+- **Ollama:all-minilm** matches ONNX MiniLM numerically — the ONNX/CGO path is no longer the only way to get MiniLM-quality embeddings in nadir.
+
+### CLI
 
 ```bash
 cat > skills.json <<'EOF'
 [
-  {"name": "/review", "description": "Review a pull request"},
-  {"name": "/security-review", "description": "Audit pending changes for security issues"},
-  {"name": "/init", "description": "Initialize a CLAUDE.md"}
+  {"name": "/review", "description": "Review a pull request",
+   "examples": ["review this PR", "look at my diff", "check the code change"]},
+  {"name": "/security-review", "description": "Audit for security issues",
+   "examples": ["audit for vulnerabilities", "check for security holes"]},
+  {"name": "/init", "description": "Initialize CLAUDE.md",
+   "examples": ["set up CLAUDE.md", "create the agent guidance file"]}
 ]
 EOF
-NADIR_CASCADE_LLM_MODEL=llama3.2:3b \
-  nadir skill-route --skills skills.json --prompt "audit this branch"
+
+# Lexical: no LLM, instant. Default when no model is configured.
+nadir skill-route --mode lexical --skills skills.json --prompt "audit this branch"
+
+# Hybrid: TF-IDF primary + LLM rerank on uncertain cases. Default
+# when NADIR_CASCADE_LLM_MODEL is set.
+NADIR_CASCADE_LLM_MODEL=qwen2.5:7b \
+  nadir skill-route --mode hybrid --skills skills.json --prompt "audit this branch"
+
+# LLM-only: one upstream call against a flat catalog.
+NADIR_CASCADE_LLM_MODEL=qwen2.5:7b NADIR_CASCADE_LLM_TIMEOUT_SEC=60 \
+  nadir skill-route --mode llm --skills skills.json --prompt "audit this branch"
 ```
 
-The CLI exposes the LLM-only `Router` (no embedding-asset dependency).
+Unparseable replies and out-of-catalog picks always yield
+`{"fell_through": true}` — no matcher silently picks the closest
+skill. The caller decides what to do on fallthrough.
 For Semantic / Cascade production use, integrate the library directly.
 
 Unparseable replies and out-of-catalog picks always yield

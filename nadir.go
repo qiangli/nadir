@@ -54,6 +54,8 @@
 package nadir
 
 import (
+	"context"
+
 	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/router"
 	"github.com/qiangli/nadir/skillrouter"
@@ -112,11 +114,34 @@ func IsTransientError(err error) bool {
 	return types.IsTransient(err)
 }
 
-// NewSkillRouter is a convenience constructor for the skill-routing
-// pipeline. It picks the best slash-command / tool name for a prompt
-// from a caller-registered catalog by asking a small LLM (typically
-// Ollama llama3.2:3b). For options (timeout, logger, max tokens),
-// import skillrouter directly.
+// NewLexicalSkillMatcher builds the no-dependencies production
+// default: a Semantic matcher backed by a TF-IDF embedder fitted
+// from the catalog's own exemplars. ~94% top-1 accuracy on the eval
+// corpus, ~1.6 µs per Route call, zero deps. Use this when the
+// binary must be static or Ollama isn't available.
+func NewLexicalSkillMatcher(skills []Skill) (SkillMatcher, error) {
+	return skillrouter.NewLexical(skills)
+}
+
+// NewHybridSkillMatcher builds the recommended production matcher
+// when Ollama is available: TF-IDF primary handles the easy cases
+// in microseconds; the LLM is consulted only when the primary's
+// top-1 is uncertain. ~97% top-1 accuracy on the eval corpus.
+// Silent fallback to the primary on LLM error — routing never
+// returns a 5xx. See skillrouter.NewHybrid for the full contract.
+//
+// For finer control (custom thresholds, alternative primary
+// embedders), build the matcher directly from skillrouter.NewSemantic
+// and skillrouter.NewCascade.
+func NewHybridSkillMatcher(ctx context.Context, llmClient LLMClient, llmModel string, skills []Skill) (SkillMatcher, error) {
+	return skillrouter.NewHybrid(ctx, llmClient, llmModel, skills)
+}
+
+// NewSkillRouter is the LLM-only constructor: a single LLM call
+// against a flat catalog. ~88–91% top-1 accuracy. Useful for
+// prototyping or for catalogs <15 where the LLM saturates the
+// context cheaply. For production, prefer NewHybridSkillMatcher (or
+// NewLexicalSkillMatcher when Ollama isn't available).
 func NewSkillRouter(client LLMClient, model string, skills []Skill) *SkillRouter {
 	return skillrouter.New(client, model, skills)
 }
