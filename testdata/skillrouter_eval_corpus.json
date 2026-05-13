@@ -1,0 +1,105 @@
+{
+  "_comment": "Skill-routing eval corpus. expected: skill name or null for out-of-catalog (must Fellthrough). hardness: 'easy' = same vocab as exemplars; 'paraphrase' = synonyms/different vocab; 'overlap' = could plausibly fit multiple skills; 'ood' = genuinely no skill applies.",
+  "skills": [
+    {
+      "name": "/review",
+      "description": "Review a pull request or code change for quality and correctness",
+      "examples": [
+        "review this pull request",
+        "look at the code changes",
+        "check my PR",
+        "give feedback on this diff",
+        "code review the new feature"
+      ]
+    },
+    {
+      "name": "/security-review",
+      "description": "Audit the pending changes for security vulnerabilities and risks",
+      "examples": [
+        "audit this for security issues",
+        "check for vulnerabilities in the diff",
+        "security review the auth changes",
+        "find security flaws in the code",
+        "look for security risks before merging"
+      ]
+    },
+    {
+      "name": "/init",
+      "description": "Initialize a CLAUDE.md file with project architecture and build instructions",
+      "examples": [
+        "initialize CLAUDE.md for this project",
+        "create the CLAUDE memory file",
+        "set up CLAUDE.md from scratch",
+        "generate the agent guidance file"
+      ]
+    },
+    {
+      "name": "/test",
+      "description": "Run the project's test suite",
+      "examples": [
+        "run the tests",
+        "execute the test suite",
+        "kick off go test",
+        "run unit tests"
+      ]
+    },
+    {
+      "name": "/fix",
+      "description": "Diagnose and fix a bug or failing test",
+      "examples": [
+        "fix this bug",
+        "debug the failing test",
+        "find and repair the broken code",
+        "investigate why it's crashing"
+      ]
+    }
+  ],
+  "cases": [
+    {"prompt": "please review my pull request", "expected": "/review", "hardness": "easy"},
+    {"prompt": "can you look at this diff", "expected": "/review", "hardness": "easy"},
+    {"prompt": "I'd like feedback on the new feature branch", "expected": "/review", "hardness": "paraphrase"},
+    {"prompt": "PR review please", "expected": "/review", "hardness": "easy"},
+    {"prompt": "check my changes before I merge", "expected": "/review", "hardness": "paraphrase"},
+    {"prompt": "give me a code review", "expected": "/review", "hardness": "easy"},
+    {"prompt": "comment on my patch", "expected": "/review", "hardness": "paraphrase"},
+
+    {"prompt": "audit this branch for vulnerabilities", "expected": "/security-review", "hardness": "easy"},
+    {"prompt": "check the auth code for security problems", "expected": "/security-review", "hardness": "easy"},
+    {"prompt": "are there any security holes here", "expected": "/security-review", "hardness": "paraphrase"},
+    {"prompt": "look for CVE-style issues in the diff", "expected": "/security-review", "hardness": "paraphrase"},
+    {"prompt": "is this code safe to ship", "expected": "/security-review", "hardness": "paraphrase"},
+    {"prompt": "perform a security audit on the changes", "expected": "/security-review", "hardness": "easy"},
+    {"prompt": "find injection vulnerabilities", "expected": "/security-review", "hardness": "paraphrase"},
+
+    {"prompt": "initialize a CLAUDE.md", "expected": "/init", "hardness": "easy"},
+    {"prompt": "set up the agent guidance file", "expected": "/init", "hardness": "easy"},
+    {"prompt": "create CLAUDE.md from scratch", "expected": "/init", "hardness": "easy"},
+    {"prompt": "I need a CLAUDE memory file for this repo", "expected": "/init", "hardness": "paraphrase"},
+    {"prompt": "bootstrap the CLAUDE configuration", "expected": "/init", "hardness": "paraphrase"},
+
+    {"prompt": "run the tests", "expected": "/test", "hardness": "easy"},
+    {"prompt": "execute go test", "expected": "/test", "hardness": "easy"},
+    {"prompt": "kick off the test suite", "expected": "/test", "hardness": "easy"},
+    {"prompt": "make test", "expected": "/test", "hardness": "paraphrase"},
+    {"prompt": "verify the tests pass", "expected": "/test", "hardness": "paraphrase"},
+
+    {"prompt": "fix this bug", "expected": "/fix", "hardness": "easy"},
+    {"prompt": "debug the failing test", "expected": "/fix", "hardness": "easy"},
+    {"prompt": "why is this code crashing", "expected": "/fix", "hardness": "paraphrase"},
+    {"prompt": "the test is broken, can you repair it", "expected": "/fix", "hardness": "paraphrase"},
+    {"prompt": "diagnose this stack trace", "expected": "/fix", "hardness": "paraphrase"},
+
+    {"prompt": "review the diff and check for security issues", "expected": "/security-review", "hardness": "overlap"},
+    {"prompt": "security check this PR", "expected": "/security-review", "hardness": "overlap"},
+    {"prompt": "review and audit this change", "expected": "/security-review", "hardness": "overlap"},
+    {"prompt": "the failing test seems like a security bug", "expected": "/fix", "hardness": "overlap"},
+    {"prompt": "run the tests and fix anything that breaks", "expected": "/test", "hardness": "overlap"},
+
+    {"prompt": "what time is it in Tokyo", "expected": null, "hardness": "ood"},
+    {"prompt": "tell me a joke", "expected": null, "hardness": "ood"},
+    {"prompt": "what's the weather forecast", "expected": null, "hardness": "ood"},
+    {"prompt": "explain quantum entanglement", "expected": null, "hardness": "ood"},
+    {"prompt": "translate this to Spanish", "expected": null, "hardness": "ood"},
+    {"prompt": "write a haiku about clouds", "expected": null, "hardness": "ood"}
+  ]
+}
