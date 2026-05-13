@@ -4,6 +4,7 @@ priorart/
 # Go build artifacts
 /nadir
 /bin/
+/skillrouter-eval
 *.test
 *.out
 
