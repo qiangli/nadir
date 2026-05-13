@@ -28,6 +28,7 @@ func main() {
 		newSetupCmd(),
 		newAuthCmd(),
 		newDashboardCmd(),
+		newSkillRouteCmd(),
 	)
 
 	if err := root.Execute(); err != nil {

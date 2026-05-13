@@ -56,6 +56,7 @@ package nadir
 import (
 	"github.com/qiangli/nadir/classifier"
 	"github.com/qiangli/nadir/router"
+	"github.com/qiangli/nadir/skillrouter"
 	"github.com/qiangli/nadir/types"
 )
 
@@ -73,6 +74,16 @@ type (
 	Router        = types.Router
 	LLMClient     = types.LLMClient
 	ProviderError = types.ProviderError
+
+	// Skill-routing surface (parallel to model-tier routing).
+	Skill         = skillrouter.Skill
+	SkillRouter   = skillrouter.Router
+	SkillDecision = skillrouter.Decision
+	SkillMatcher  = skillrouter.Matcher
+	SkillSemantic = skillrouter.Semantic
+	SkillCascade  = skillrouter.Cascade
+	SkillEmbedder = skillrouter.Embedder
+	SkillRanked   = skillrouter.Ranked
 )
 
 // Tier constants re-exported for convenience.
@@ -101,8 +112,18 @@ func IsTransientError(err error) bool {
 	return types.IsTransient(err)
 }
 
+// NewSkillRouter is a convenience constructor for the skill-routing
+// pipeline. It picks the best slash-command / tool name for a prompt
+// from a caller-registered catalog by asking a small LLM (typically
+// Ollama llama3.2:3b). For options (timeout, logger, max tokens),
+// import skillrouter directly.
+func NewSkillRouter(client LLMClient, model string, skills []Skill) *SkillRouter {
+	return skillrouter.New(client, model, skills)
+}
+
 // _ packages referenced for godoc cross-linking only.
 var (
 	_ = classifier.DefaultThresholds
 	_ = router.New
+	_ = skillrouter.New
 )
