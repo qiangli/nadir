@@ -5,7 +5,7 @@ BINDIR  := bin
 GOFLAGS := -trimpath
 LDFLAGS := -s -w
 
-.PHONY: help tidy fmt vet build build-onnx test test-onnx clean
+.PHONY: help tidy fmt vet build build-onnx test test-onnx clean fmtcheck hooks
 
 help: ## Show this help (default target)
 	@awk 'BEGIN {FS = ":.*?## "; printf "\nUsage: make <target>\n\nTargets:\n"} \
@@ -39,3 +39,10 @@ test-onnx: ## Run unit tests including the ONNX classifier path
 clean: ## Remove build artifacts
 	rm -rf $(BINDIR)
 	go clean -testcache
+
+fmtcheck:  ## gofmt gate — reports unformatted files, never rewrites them
+	@./scripts/fmtcheck.sh
+
+hooks:  ## install the pre-push formatting gate
+	@git config core.hooksPath scripts/hooks
+	@echo "hooks installed: core.hooksPath=scripts/hooks"
