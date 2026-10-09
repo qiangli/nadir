@@ -1,6 +1,8 @@
 module github.com/qiangli/nadir
 
-go 1.26.5
+go 1.27
+
+toolchain go1.27.1
 
 require (
 	github.com/go-chi/chi/v5 v5.2.5
