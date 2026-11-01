@@ -3,11 +3,13 @@ package logmaint
 import (
 	"compress/gzip"
 	"context"
+	"errors"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/qiangli/nadir/internal/store/jsonl"
 	"github.com/qiangli/nadir/types"
@@ -25,7 +27,7 @@ func TestRotateGzipsAndPrunes(t *testing.T) {
 	for range 50 {
 		_ = w.Log(context.Background(), &types.RequestEntry{ID: "x", Model: "m", Status: "ok"})
 	}
-	m := New(Config{Path: path, MaxBytes: 200, Keep: 2}, w)
+	m := New(Config{Path: path, MaxBytes: 200, Keep: 2, NowFunc: func() time.Time { return time.Unix(1700000000, 0) }}, w)
 	if err := m.MaybeRotate(); err != nil {
 		t.Fatalf("rotate: %v", err)
 	}
@@ -53,5 +55,32 @@ func TestRotateGzipsAndPrunes(t *testing.T) {
 	data, _ := io.ReadAll(gr)
 	if !strings.Contains(string(data), `"id":"x"`) {
 		t.Errorf("archive content unexpected: %q", data[:min(80, len(data))])
+	}
+}
+
+func TestGzipRemovesClosedInput(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "archive")
+	if err := os.WriteFile(path, []byte("retained rows\n"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := gzipFile(path); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(path); !errors.Is(err, os.ErrNotExist) {
+		t.Fatalf("input remains: %v", err)
+	}
+	f, err := os.Open(path + ".gz")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	gz, err := gzip.NewReader(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer gz.Close()
+	data, err := io.ReadAll(gz)
+	if err != nil || string(data) != "retained rows\n" {
+		t.Fatalf("gzip rows: %q, %v", data, err)
 	}
 }

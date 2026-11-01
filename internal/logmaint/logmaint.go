@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -25,11 +26,12 @@ type Config struct {
 }
 
 type Maintainer struct {
+	mu      sync.Mutex
 	cfg     Config
-	rotator interface{ Rotate() error }
+	rotator interface{ Rotate(string) error }
 }
 
-func New(cfg Config, rotator interface{ Rotate() error }) *Maintainer {
+func New(cfg Config, rotator interface{ Rotate(string) error }) *Maintainer {
 	if cfg.MaxBytes <= 0 {
 		cfg.MaxBytes = 100 * 1024 * 1024
 	}
@@ -45,6 +47,8 @@ func New(cfg Config, rotator interface{ Rotate() error }) *Maintainer {
 // MaybeRotate inspects the active file size and rotates if needed.
 // Callers wire this to a ticker; it's safe to call from a goroutine.
 func (m *Maintainer) MaybeRotate() error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
 	info, err := os.Stat(m.cfg.Path)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
@@ -58,11 +62,22 @@ func (m *Maintainer) MaybeRotate() error {
 
 	stamp := m.cfg.NowFunc().UTC().Format("20060102T150405Z")
 	archive := m.cfg.Path + "." + stamp
-	if err := os.Rename(m.cfg.Path, archive); err != nil {
+	if _, err := os.Lstat(archive + ".gz"); err == nil {
+		return os.ErrExist
+	} else if !errors.Is(err, os.ErrNotExist) {
 		return err
 	}
 	if m.rotator != nil {
-		if err := m.rotator.Rotate(); err != nil {
+		if err := m.rotator.Rotate(archive); err != nil {
+			return err
+		}
+	} else {
+		if _, err := os.Lstat(archive); err == nil {
+			return os.ErrExist
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+		if err := os.Rename(m.cfg.Path, archive); err != nil {
 			return err
 		}
 	}
@@ -112,7 +127,9 @@ func gzipFile(path string) error {
 		_ = gw.Close()
 		return err
 	}
-	if err := gw.Close(); err != nil {
+	// Finish and close every handle before removing the input. Windows does
+	// not permit deleting an open file; a failed flush must preserve it.
+	if err := errors.Join(gw.Close(), out.Close(), in.Close()); err != nil {
 		return err
 	}
 	if err := os.Remove(path); err != nil {
