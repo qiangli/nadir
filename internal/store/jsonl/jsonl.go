@@ -49,31 +49,22 @@ func (w *Writer) Log(_ context.Context, e *types.RequestEntry) error {
 	return err
 }
 
-// Rotate moves the current log to archive and opens a new active file while
-// excluding Log calls. Closing before rename also works on Windows.
-func (w *Writer) Rotate(archive string) error {
+// Rotate closes the current file and re-opens it at path. Used by
+// logmaint after it has renamed the previous file out of the way.
+func (w *Writer) Rotate() error {
 	w.mu.Lock()
 	defer w.mu.Unlock()
-	if w.f == nil {
-		return errors.New("jsonl writer closed")
+	if w.f != nil {
+		if err := w.f.Close(); err != nil {
+			return err
+		}
 	}
-	// Never overwrite an existing archive (including a same-second rotation).
-	if _, err := os.Lstat(archive); err == nil {
-		return os.ErrExist
-	} else if !errors.Is(err, os.ErrNotExist) {
+	f, err := os.OpenFile(w.path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
+	if err != nil {
 		return err
 	}
-	closeErr := w.f.Close()
-	w.f = nil
-	if closeErr != nil {
-		return closeErr
-	}
-	renameErr := os.Rename(w.path, archive)
-	// On rename failure, reopen the original file so subsequent logs remain
-	// writable. On success this creates the next active file.
-	f, openErr := os.OpenFile(w.path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
 	w.f = f
-	return errors.Join(renameErr, openErr)
+	return nil
 }
 
 func (w *Writer) Close() error {
